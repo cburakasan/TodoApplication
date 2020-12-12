@@ -38,6 +38,14 @@ public class UserController {
     @Autowired
     JwtUtils jwtUtils;
 
+    /**
+     * User girişinin yapıldığı servis.
+     * Username ve password ile giriş yapılır ve
+     * alınan bir token üzerinden authenticate işlemi yapılır.
+     * Veritabanına kayıt yapılırken Password şifrelenir.
+     * @param loginRequest
+     * @return
+     */
     @PostMapping("/signin")
     public UserResponse authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
         UserResponse userResponse = new UserResponse();

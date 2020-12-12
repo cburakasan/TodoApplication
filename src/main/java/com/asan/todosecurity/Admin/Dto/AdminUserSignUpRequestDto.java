@@ -2,7 +2,7 @@ package com.asan.todosecurity.Admin.Dto;
 
 import java.util.Set;
 
-public class SignupRequest {
+public class AdminUserSignUpRequestDto {
     private String username;
     private String email;
     private String password;

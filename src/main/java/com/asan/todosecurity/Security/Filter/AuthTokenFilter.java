@@ -34,10 +34,19 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     @Autowired
     SessionUtil sessionUtil;
 
-    public AuthTokenFilter(SessionUtil sessionUtil){
+    public AuthTokenFilter(SessionUtil sessionUtil) {
         this.sessionUtil = sessionUtil;
     }
 
+    /**
+     * İstek yapıldıgı anda filter yapısı çalışarak token kontrolü yapılır.
+     * Tokena ait kullanıcı bilgisi var ise session üzerine yazılır.
+     * @param request
+     * @param response
+     * @param filterChain
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {

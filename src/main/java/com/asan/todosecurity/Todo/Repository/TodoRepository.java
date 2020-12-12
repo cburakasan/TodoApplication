@@ -14,4 +14,6 @@ public interface TodoRepository extends JpaRepository<Todo,Long> {
 
     List<Todo> findAllByTimeBetween( Date firstDate, Date lastDate);
 
+    List<Todo> findAllByUserIdAndTimeBetween(Long userId, Date firstDate, Date lastDate);
+
 }

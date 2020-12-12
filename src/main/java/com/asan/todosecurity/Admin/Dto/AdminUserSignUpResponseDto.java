@@ -1,6 +1,6 @@
 package com.asan.todosecurity.Admin.Dto;
 
-public class SignupResponse {
+public class AdminUserSignUpResponseDto {
     private String message;
 
     public String getMessage() {

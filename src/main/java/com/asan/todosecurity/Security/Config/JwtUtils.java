@@ -13,12 +13,20 @@ import java.util.Date;
 @Component
 public class JwtUtils  {
 
+    /**
+     * application.properties üzerinden jwtSecret ve timeout değerleri alınır
+     */
     @Value("${todosecurity.app.jwtSecret}")
     private String jwtSecret;
 
     @Value("${todosecurity.app.jwtExpirationMs}")
     private int jwtExpirationMs;
 
+    /**
+     * Token üretilen method
+     * @param authentication
+     * @return
+     */
     public String generateJwtToken(Authentication authentication) {
 
         UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();

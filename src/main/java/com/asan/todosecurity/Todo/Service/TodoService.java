@@ -6,7 +6,7 @@ import com.asan.todosecurity.Todo.Dto.*;
 import com.asan.todosecurity.Todo.Enum.Status;
 import com.asan.todosecurity.Todo.Model.Todo;
 import com.asan.todosecurity.Todo.Repository.TodoRepository;
-import com.asan.todosecurity.Todo.TodoException;
+import com.asan.todosecurity.Todo.Exception.TodoException;
 import com.asan.todosecurity.User.Dto.UserDto;
 import com.asan.todosecurity.User.Model.User;
 import com.asan.todosecurity.User.Model.UserDetailsImpl;
@@ -15,7 +15,6 @@ import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpSession;
 import java.util.*;
 
 @Service
@@ -141,12 +140,16 @@ public class TodoService {
             UserDetailsImpl userDetails = sessionUtil.getUser();
             Long userId = userDetails.getId();
             Boolean dateOrderByDesc = todoListRequestDto.getDateOrderByDesc();
-
-            Optional<User> userOptional = userRepositroy.findById(userId);
-            User user = userOptional.get();
+            Date firsDate = todoListRequestDto.getFirsDate();
+            Date lastDate = todoListRequestDto.getLastDate();
 
             List<Todo> todoList = null;
-            todoList = todoRepository.findAllByUserId(user.getId());
+            if(firsDate !=null && lastDate != null){
+                todoList =  todoRepository.findAllByUserIdAndTimeBetween(userId, firsDate, lastDate);
+            }else {
+                todoList = todoRepository.findAllByUserId(userId);
+
+            }
 
             for (Todo todo : todoList) {
                 Long todoId = todo.getId();
@@ -198,7 +201,6 @@ public class TodoService {
 
             }
 
-
             for (Todo todo : todoList) {
                 Long todoId = todo.getId();
                 String work = todo.getWork();
@@ -246,7 +248,16 @@ public class TodoService {
             Boolean dateOrderByDesc = todoListRequestDto.getDateOrderByDesc();
             Long userId = todoListRequestDto.getUserId();
 
-            List<Todo> todoList = todoRepository.findAllByUserId(userId);
+            Date firsDate = todoListRequestDto.getFirsDate();
+            Date lastDate = todoListRequestDto.getLastDate();
+
+            List<Todo> todoList = null;
+            if(firsDate !=null && lastDate != null){
+                todoList =  todoRepository.findAllByUserIdAndTimeBetween(userId, firsDate, lastDate);
+            }else {
+                todoList = todoRepository.findAllByUserId(userId);
+
+            }
 
             for (Todo todo : todoList) {
                 Long todoId = todo.getId();

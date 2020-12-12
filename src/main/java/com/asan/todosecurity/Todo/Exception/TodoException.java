@@ -1,4 +1,4 @@
-package com.asan.todosecurity.Todo;
+package com.asan.todosecurity.Todo.Exception;
 
 import lombok.Data;
 

@@ -6,4 +6,6 @@ import java.io.Serializable;
 
 @Data
 public class AdminUserDeleteRequestDto implements Serializable {
+
+    private Long userId;
 }

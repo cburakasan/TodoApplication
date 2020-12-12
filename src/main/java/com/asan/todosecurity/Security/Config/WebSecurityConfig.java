@@ -58,6 +58,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * /admin/signup ve /user/signin pathleri üzerinden gelen isteklerde herhangi bir
+     * login girişi istenmemektedir.
+     * Bu pathler dışında gelen her servis isteği için önce login olunmalıdır.
+     * Login sonrası kullanıcı bilgileri session üzerinde tutulduğu için,
+     * bir kere login olduktan sonra yetkisi dahilindeki diğer servislere istek yapılabilir.
+     * @param http
+     * @throws Exception
+     */
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
@@ -69,17 +78,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.addFilterBefore((Filter) authenticationJwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
     }
-
-//    Authentication authentication =
-//            authenticationManager().authenticate(
-//                    new UsernamePasswordAuthenticationToken(username, password)
-//            );
-
-//    UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-// userDetails.getUsername()
-// userDetails.getPassword()
-// userDetails.getAuthorities()
-
-
 
 }

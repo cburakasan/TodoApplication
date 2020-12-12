@@ -9,6 +9,8 @@ import lombok.ToString;
 @EqualsAndHashCode(exclude = {"id"})
 public class AdminUserUpdateRequestDto {
 
+    private Long userId;
+
     private String username;
 
     private String password;
@@ -17,5 +19,4 @@ public class AdminUserUpdateRequestDto {
 
     private String gsm;
 
-    private String admin;
 }
