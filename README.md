@@ -19,6 +19,4 @@ Maven
 Lombok
 MySQL
 
-![Signin](/relative/path/to/signin.JPG?raw=true "SIGN IN")
-
 
